@@ -4,7 +4,7 @@ class ChangeSubPageBtn extends React.Component{
 	handleClick= ()=> {
 		this.props.changeSubPage(this.props.recordType);
 		if(this.props.recordType !=="editEntry"){
-			this.props.filterData(this.props.recordType)
+			this.props.filterByEntryType(this.props.recordType)
 		}
 	}
 

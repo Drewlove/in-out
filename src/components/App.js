@@ -1,25 +1,16 @@
 /*
 Friday, 7/6: 1.25
 Sun 7/8: 1.5
+Mon 7/9: 1.75
 
 **Next:
-** Invoices -> customers
-refactor filterData and listCustomers
-better way to refactor?
-
-See this codepen as a way to dedpulicate the array of store names
-https://codepen.io/thisisdrewlove/pen/GGVzBb?editors=0012
-
-
-
-** Look at RecordRow, generate cells based upon strings in
-recordTableType
-Should work for unpaid invoices, paid invoices, and customers
+component: recordTable, look at entry
+how do you render only the cells that are relevant to that subPage?
+Should have an array that shows what cells are relevant for that subPageType
+then the entry prop is composed of only those cells, which will require some kind of filtering
 
 *be able to recod invoices as Paid
 *when invoices are good, then move similar code to Bills
-
-
 
 */
 import React from 'react';
@@ -75,32 +66,33 @@ class App extends React.Component {
 		this.clearDataView();
 	}
 
-	filterData = (subPageType) => {
+	filterByEntryType = (subPageType) => {
 		const page = this.state.page;
 		const data = this.state.data;
 
-		let recordTypeObj = {};
-		//find all entries that match the subPageType and set to recordTypeObj
+		let matchingEntriesObj = {};
+		//find all entries that match the subPageType(ie "bils", "invoices" etc.)
 		Object.keys(data).map(key => {
 			let entry = data[key];
 			if(entry.recordType === page){
-				recordTypeObj[key] = entry;
+				//set matching entries to matchingEntriesObj
+				matchingEntriesObj[key] = entry;
 			}
 		})
 		if(subPageType === "unpaid" || subPageType === "paid"){
-			this.filterDataByStatus(recordTypeObj, subPageType);
+			this.filterByPaymentStatus(matchingEntriesObj, subPageType);
 		} else if (subPageType === "customers"){
-			this.filterDataByCustomers(recordTypeObj);
+			this.filterByCustomers(matchingEntriesObj);
 		}
 	}
 
-	filterDataByStatus = (recordTypeObj, subPageType) => {
+	filterByPaymentStatus = (entriesObj, subPageType) => {
 		const page = this.state.page;
 		const dataView = {...this.state.dataView};
 		const data = this.state.data;
 
-		Object.keys(recordTypeObj).map(key => {
-			const entry = recordTypeObj[key];
+		Object.keys(entriesObj).map(key => {
+			const entry = entriesObj[key];
 			if(entry.status === subPageType){
 				dataView[key] = entry;
 			}
@@ -108,13 +100,11 @@ class App extends React.Component {
 		this.setState({dataView})
 	}
 
-	filterDataByCustomers = (recordTypeObj) => {
+	filterByCustomers = (recordTypeObj) => {
 		const page = this.state.page;
 		const dataView = {...this.state.dataView};
 		const data = this.state.data;
-
 		let customerArr = [];
-
 		Object.keys(recordTypeObj).map(key => {
 			const storeName = recordTypeObj[key].name;
 			const entry = recordTypeObj[key]
@@ -145,7 +135,11 @@ class App extends React.Component {
 		selectEntry: (updatedEntry) => {
 			const entry = this.state.entry;
 			this.setState({entry: updatedEntry});
-			this.changeSubPage("editEntry")
+			if(this.state.subPage === "customers"){
+				this.changeSubPage("editCompany")
+			} else{
+				this.changeSubPage("editEntry")
+			}
 		},
 
 		clearEntry: () => {
@@ -230,7 +224,7 @@ class App extends React.Component {
 			state={this.state}
 			changePage={this.changePage}
 			changeSubPage={this.changeSubPage}
-			filterData={this.filterData}
+			filterByEntryType={this.filterByEntryType}
 			entryMethods={this.entryMethods}
 			/> : null}
 
@@ -241,7 +235,6 @@ class App extends React.Component {
 			recordType={this.state.recordType}
 			data={this.state.data}
 			/>: null}
-
 			</div>
 		)
 	}

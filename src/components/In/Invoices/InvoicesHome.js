@@ -23,7 +23,7 @@ class InvoicesHome extends React.Component{
 					recordType="customers"
 					changeSubPage={this.props.changeSubPage}
 					page={this.props.page}
-					filterData={this.props.filterData}
+					filterByEntryType={this.props.filterByEntryType}
 					filterType={this.props.filterType}
 					/>
 				</div>
@@ -35,7 +35,7 @@ class InvoicesHome extends React.Component{
 					recordType="paid"
 					changeSubPage={this.props.changeSubPage}
 					page={this.props.page}
-					filterData={this.props.filterData}
+					filterByEntryType={this.props.filterByEntryType}
 					filterType={this.props.filterType}
 					/>
 
@@ -45,7 +45,7 @@ class InvoicesHome extends React.Component{
 					recordType="unpaid"
 					changeSubPage={this.props.changeSubPage}
 					page={this.props.page}
-					filterData={this.props.filterData}
+					filterByEntryType={this.props.filterByEntryType}
 					filterType={this.props.filterType}
 					/>
 				</div>

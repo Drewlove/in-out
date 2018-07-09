@@ -6,9 +6,8 @@ class PaidInvoices extends React.Component{
 		return(
 			<RecordTable
 			dataView={this.props.dataView}
-			page={this.props.page}
-			recordType={this.props.recordType}
 			entryMethods={this.props.entryMethods}
+			state={this.props.state}
 			/>
 			)
 	}

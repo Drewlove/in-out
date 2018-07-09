@@ -7,6 +7,7 @@ class Customers extends React.Component{
 			<RecordTable
 			dataView={this.props.dataView}
 			entryMethods={this.props.entryMethods}
+			state={this.props.state}
 			/>
 			)
 	}

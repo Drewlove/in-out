@@ -17,14 +17,31 @@ class ContainerInvoices extends React.Component{
 				dataView={this.props.state.dataView}
 				page={this.props.state.page}
 				changeSubPage={this.props.changeSubPage}
-				filterData={this.props.filterData}
+				filterByEntryType={this.props.filterByEntryType}
 				/>
 				: null}
 
 				{this.props.state.subPage === "customers" ?
 				<Customers
 				dataView={this.props.state.dataView}
-				entryMethods={this.props.entryMethods.selectEntry}
+				entryMethods={this.props.entryMethods}
+				state={this.props.state}
+				/>
+				: null}
+
+				{this.props.state.subPage === "paid" ?
+				<PaidInvoices
+				dataView={this.props.state.dataView}
+				entryMethods={this.props.entryMethods}
+				state={this.props.state}
+				/>
+				: null}
+
+				{this.props.state.subPage === "unpaid" ?
+				<UnpaidInvoices
+				dataView={this.props.state.dataView}
+				entryMethods={this.props.entryMethods}
+				state={this.props.state}
 				/>
 				: null}
 
@@ -38,19 +55,16 @@ class ContainerInvoices extends React.Component{
 				/>
 				: null}
 
-				{this.props.state.subPage === "paid" ?
-				<PaidInvoices
-				dataView={this.props.state.dataView}
+				{this.props.state.subPage === "editCompany" ?
+				<EntryInvoice
 				entryMethods={this.props.entryMethods}
+				dataView={this.props.state.dataView}
+				entry={this.props.state.entry}
+				confirmationModal={this.props.state.confirmationModal}
+				changeSubPage={this.props.changeSubPage}
 				/>
 				: null}
 
-				{this.props.state.subPage === "unpaid" ?
-				<UnpaidInvoices
-				dataView={this.props.state.dataView}
-				entryMethods={this.props.entryMethods}
-				/>
-				: null}
 		</div>
 		)
 	}

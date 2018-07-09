@@ -22,3 +22,7 @@ class RecordRow extends React.Component {
 }
 
 export default RecordRow;
+
+//depending upon subPage, render relevant ContainerBills
+//given this subPage, render these cells
+//array of cells that you want to be rendered, depending upon subPage
