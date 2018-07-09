@@ -1,0 +1,109 @@
+*{
+    font-family: helvetica; 
+}
+
+body{
+	margin: 0;
+}
+
+.header{
+    position: fixed;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    z-index: 1;
+    top: 0;
+    margin: 0;
+    height: 50px;
+}
+
+.header:hover{
+	cursor:pointer;
+}
+
+.header-in{
+	color: #4fc15a;
+}
+.header-out{
+	color: red;
+}
+
+.menu-item-container{
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 100px;
+}
+
+.menu-item{
+    text-align: center;
+    font-size: 52px;
+    border: 1px solid black;
+    height: 125px;
+    width: 250px;
+    margin-bottom: 25px;
+    color: white;
+    border-radius:15px;
+    transition: transform 0.25s;
+}
+
+.menu-item:hover{
+	cursor:pointer;
+	transform: scale(1.05);
+}
+
+.menu-item-in>div{
+	background-color: #4fc15a;
+}
+
+.menu-item-out>div{
+	background-color: red;
+}
+
+.menu-item-info>div{
+	background-color: black;
+}
+
+.record-table{
+	margin-top: 100px;
+    min-width: 500px;
+}
+
+.record-table>thead{
+    min-width: 500px;
+    position: fixed;
+    background-color: yellow;
+    width: 100%;
+    margin: 0px;
+    top: 50px;
+}
+
+.record-table-row:hover{
+    background-color: grey;
+    cursor: pointer;
+}
+
+.record-table td{
+    font-size: 21px;
+    width: 125px;
+    padding: 10px;
+}
+
+.entry{
+    margin-top:100px;
+}
+
+.modal-container{
+    background-color: red;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.modal-content{
+    border: 1px solid black;
+    width: 250px;
+    margin: 0 auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
