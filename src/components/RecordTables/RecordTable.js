@@ -6,17 +6,25 @@ class RecordTable extends React.Component {
 
 	render(){
 			const dataView = this.props.dataView;
-			const testArray = ["name", "date", "terms"];
+			const valuesObj = {
+				customerArray: ["name", "terms"],
+				billAndInvoiceArray: ["name", "date", "amount", "terms", "status"]
+			};
+
+
 		return (
 			<table className="record-table">
-			<RecordHeader />
+
+			<RecordHeader
+			valuesObj={valuesObj}
+			/>
 				<tbody>
 					{Object.keys(this.props.dataView).map(key =>
 						<RecordRow
 						key={key}
-						entry={Object.keys(dataView[key]).filter(objProp => this.testArr.indexOf(objProp) !== -1)}
+						entry={this.props.dataView[key]}
+						valuesObj={valuesObj.customerArray}
 						selectEntry={this.props.entryMethods.selectEntry}
-						state={this.props.state}
 						/>
 						)}
 				</tbody>

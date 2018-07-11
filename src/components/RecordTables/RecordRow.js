@@ -10,17 +10,17 @@ class RecordRow extends React.Component {
 	render(){
 		return (
 			<tr onClick={this.handleClick} className="record-table-row">
-				{Object.keys(this.props.entry).map(key =>
-					<RecordCell
-						key={key}
-						value={this.props.entry[key]}
-					/>
-				)}
+			{this.props.valuesArray.map(key =>
+				<RecordCell
+					value={this.props.entry[key]}
+					key={key}
+				/>
+			)
+		}
 			</tr>
 			)
 	}
 }
-
 export default RecordRow;
 
 //depending upon subPage, render relevant ContainerBills

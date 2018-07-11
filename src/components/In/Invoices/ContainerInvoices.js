@@ -25,7 +25,7 @@ class ContainerInvoices extends React.Component{
 				<Customers
 				dataView={this.props.state.dataView}
 				entryMethods={this.props.entryMethods}
-				state={this.props.state}
+				sunPage={this.props.subPage}
 				/>
 				: null}
 
@@ -33,7 +33,7 @@ class ContainerInvoices extends React.Component{
 				<PaidInvoices
 				dataView={this.props.state.dataView}
 				entryMethods={this.props.entryMethods}
-				state={this.props.state}
+				sunPage={this.props.subPage}
 				/>
 				: null}
 
@@ -41,7 +41,7 @@ class ContainerInvoices extends React.Component{
 				<UnpaidInvoices
 				dataView={this.props.state.dataView}
 				entryMethods={this.props.entryMethods}
-				state={this.props.state}
+				sunPage={this.props.subPage}
 				/>
 				: null}
 

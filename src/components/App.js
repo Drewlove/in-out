@@ -2,12 +2,13 @@
 Friday, 7/6: 1.25
 Sun 7/8: 1.5
 Mon 7/9: 1.75
+Tue 7/10: 0.5
 
 **Next:
 component: recordTable, look at entry
-how do you render only the cells that are relevant to that subPage?
-Should have an array that shows what cells are relevant for that subPageType
-then the entry prop is composed of only those cells, which will require some kind of filtering
+create different arrays depending upon what data should be rendered in cells
+match subPage to arrayName (paidAndUnpaidArray, customerArray)
+If match, use corresponding array
 
 *be able to recod invoices as Paid
 *when invoices are good, then move similar code to Bills
@@ -221,11 +222,11 @@ class App extends React.Component {
 
 			{this.state.page === "invoices" ?
 			<ContainerInvoices
-			state={this.state}
 			changePage={this.changePage}
 			changeSubPage={this.changeSubPage}
 			filterByEntryType={this.filterByEntryType}
 			entryMethods={this.entryMethods}
+			state={this.state}
 			/> : null}
 
 			{this.state.page==="bills" ?
