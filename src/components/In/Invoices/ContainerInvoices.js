@@ -1,9 +1,12 @@
 import React from "react";
 import InvoicesHome from "./InvoicesHome";
-import Customers from "./Customers"
-import EntryInvoice from "./EntryInvoice"
-import PaidInvoices from "./PaidInvoices"
-import UnpaidInvoices from "./UnpaidInvoices"
+import Customers from "./Customers";
+import PaidInvoices from "./PaidInvoices";
+import UnpaidInvoices from "./UnpaidInvoices";
+import CustomerInvoiceList from "./CustomerInvoiceList";
+import EditInvoice from "./EditInvoice";
+import EditCustomers from "./EditCustomers";
+import PayEntry from "./PayEntry";
 
 import ChangePageBtn from "../../ChangePageBtn";
 
@@ -25,7 +28,7 @@ class ContainerInvoices extends React.Component{
 				<Customers
 				dataView={this.props.state.dataView}
 				entryMethods={this.props.entryMethods}
-				sunPage={this.props.subPage}
+				subPage={this.props.state.subPage}
 				/>
 				: null}
 
@@ -33,7 +36,7 @@ class ContainerInvoices extends React.Component{
 				<PaidInvoices
 				dataView={this.props.state.dataView}
 				entryMethods={this.props.entryMethods}
-				sunPage={this.props.subPage}
+				subPage={this.props.state.subPage}
 				/>
 				: null}
 
@@ -41,12 +44,12 @@ class ContainerInvoices extends React.Component{
 				<UnpaidInvoices
 				dataView={this.props.state.dataView}
 				entryMethods={this.props.entryMethods}
-				sunPage={this.props.subPage}
+				subPage={this.props.state.subPage}
 				/>
 				: null}
 
 				{this.props.state.subPage === "editEntry" ?
-				<EntryInvoice
+				<EditInvoice
 				entryMethods={this.props.entryMethods}
 				dataView={this.props.state.dataView}
 				entry={this.props.state.entry}
@@ -55,12 +58,31 @@ class ContainerInvoices extends React.Component{
 				/>
 				: null}
 
-				{this.props.state.subPage === "editCompany" ?
-				<EntryInvoice
+				{this.props.state.subPage === "customerInvoiceList" ?
+				<CustomerInvoiceList
+				dataView={this.props.state.dataView}
+				entryMethods={this.props.entryMethods}
+				subPage={this.props.state.subPage}
+				/>
+				: null}
+
+				{this.props.state.subPage === "editCustomers" ?
+				<EditCustomers
 				entryMethods={this.props.entryMethods}
 				dataView={this.props.state.dataView}
 				entry={this.props.state.entry}
 				confirmationModal={this.props.state.confirmationModal}
+				changeSubPage={this.props.changeSubPage}
+				subPage={this.props.state.subPage}
+				/>
+				: null}
+
+				{this.props.state.subPage === "payEntry" ?
+				<PayEntry
+				dataView={this.props.state.dataView}
+				entry={this.props.state.entry}
+				entryMethods={this.props.entryMethods}
+				subPage={this.props.state.subPage}
 				changeSubPage={this.props.changeSubPage}
 				/>
 				: null}

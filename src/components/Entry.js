@@ -3,7 +3,6 @@ import ConfirmationModal from "./ConfirmationModal";
 
 class Entry extends React.Component{
 	handleChange = (e) => {
-
 		const updatedEntry = {...this.props.entry,
 			[e.currentTarget.name]: e.currentTarget.value}
 			this.props.entryMethods.updateEntry(updatedEntry, e.currentTarget.name)

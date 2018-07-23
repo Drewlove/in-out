@@ -5,18 +5,18 @@ class HomePage extends React.Component{
 	render(){
 		return (
 			<div className="menu-item-container">
-			
-				<div className="menu-item-in">
+
+				<div>
 					<ChangePageBtn changePage={this.props.changePage} loadData={this.props.loadData} name="invoices"/>
 					<ChangePageBtn changePage={this.props.changePage} loadData={this.props.loadData} name="sales"/>
 				</div>
 
-				<div className="menu-item-out">
+				<div>
 					<ChangePageBtn changePage={this.props.changePage} loadData={this.props.loadData} name="bills"/>
 					<ChangePageBtn changePage={this.props.changePage} loadData={this.props.loadData} name="payroll"/>
 				</div>
 
-				<div className="menu-item-info">
+				<div>
 					<ChangePageBtn changePage={this.props.changePage} loadData={this.props.loadData} name="reports"/>
 					<ChangePageBtn changePage={this.props.changePage} loadData={this.props.loadData} name="chart of accounts"/>
 				</div>
@@ -25,6 +25,4 @@ class HomePage extends React.Component{
 	}
 }
 
-export default HomePage; 
-
-
+export default HomePage;

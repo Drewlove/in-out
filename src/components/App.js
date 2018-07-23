@@ -1,14 +1,13 @@
 /*
-Friday, 7/6: 1.25
-Sun 7/8: 1.5
-Mon 7/9: 1.75
-Tue 7/10: 0.5
+Mon: 1.75
+Tue: 1
+Wed: 0.5,
 
 **Next:
-component: recordTable, look at entry
-create different arrays depending upon what data should be rendered in cells
-match subPage to arrayName (paidAndUnpaidArray, customerArray)
-If match, use corresponding array
+When a user clicks on an entry, they should also be able to see
+the payment record if there is one.
+
+Make a dashboard that has a profit and loss view
 
 *be able to recod invoices as Paid
 *when invoices are good, then move similar code to Bills
@@ -22,7 +21,6 @@ import ContainerInvoices from "./In/Invoices/ContainerInvoices";
 import ContainerBills from "./Out/Bills/ContainerBills";
 import storedData from "./Data/storedData";
 import Entry from "./Entry";
-
 
 class App extends React.Component {
 	state={
@@ -64,15 +62,14 @@ class App extends React.Component {
 	changeSubPage = (subPageType) => {
 		const subPage = {...this.state.subPage};
 		this.setState({subPage: subPageType})
-		this.clearDataView();
 	}
 
-	filterByEntryType = (subPageType) => {
+	filterByEntryType = (subPageType, selectedEntry) => {
 		const page = this.state.page;
 		const data = this.state.data;
-
+		const dataView = this.state.dataView;
 		let matchingEntriesObj = {};
-		//find all entries that match the subPageType(ie "bils", "invoices" etc.)
+		//find all entries that match the subPageType(ie "bills", "invoices" etc.)
 		Object.keys(data).map(key => {
 			let entry = data[key];
 			if(entry.recordType === page){
@@ -83,7 +80,10 @@ class App extends React.Component {
 		if(subPageType === "unpaid" || subPageType === "paid"){
 			this.filterByPaymentStatus(matchingEntriesObj, subPageType);
 		} else if (subPageType === "customers"){
-			this.filterByCustomers(matchingEntriesObj);
+			this.filterByCustomerName(matchingEntriesObj);
+		} else if (subPageType==="customerInvoiceList") {
+			this.clearDataView();
+			this.filterByCustomerInvoice(matchingEntriesObj, selectedEntry.name);
 		}
 	}
 
@@ -101,20 +101,32 @@ class App extends React.Component {
 		this.setState({dataView})
 	}
 
-	filterByCustomers = (recordTypeObj) => {
+	filterByCustomerName = (entriesObj) => {
 		const page = this.state.page;
 		const dataView = {...this.state.dataView};
 		const data = this.state.data;
 		let customerArr = [];
-		Object.keys(recordTypeObj).map(key => {
-			const storeName = recordTypeObj[key].name;
-			const entry = recordTypeObj[key]
+		Object.keys(entriesObj).map(key => {
+			const storeName = entriesObj[key].name;
+			const entry = entriesObj[key]
 			if(customerArr.indexOf(storeName) === -1){
 				customerArr.push(storeName);
 				dataView[key] = entry;
 			}
 		});
 		this.setState({dataView})
+	}
+
+	filterByCustomerInvoice = (entriesObj, customerName) => {
+		const dataView = this.state.dataView;
+		const customerInvoicesAll = {};
+		Object.keys(entriesObj).map(key => {
+			let entry = entriesObj[key];
+			if(entry.name === customerName){
+				customerInvoicesAll [entry.id] = entry;
+			}
+		});
+		this.setState({dataView: customerInvoicesAll});
 	}
 
 	getDueDateString = (entryObj) => {
@@ -127,19 +139,22 @@ class App extends React.Component {
 			return
 		}
 	}
+
 	clearDataView = () => {
 		const dataView = this.state.dataView
 		this.setState({dataView: {}})
 	}
 
 	entryMethods = {
-		selectEntry: (updatedEntry) => {
+		selectEntry: (selectedEntry, subPage) => {
 			const entry = this.state.entry;
-			this.setState({entry: updatedEntry});
+			this.setState({entry: selectedEntry});
 			if(this.state.subPage === "customers"){
-				this.changeSubPage("editCompany")
+				this.changeSubPage("customerInvoiceList");
+				this.filterByEntryType("customerInvoiceList", selectedEntry);
 			} else{
 				this.changeSubPage("editEntry")
+				this.clearDataView();
 			}
 		},
 
@@ -165,8 +180,8 @@ class App extends React.Component {
 			}
 		},
 
-		saveEntry: (entry) => {
-			const data = {...this.state.data};
+		saveEntry: (entry, subPage) => {
+			const data=this.state.data;
 			if(!entry.id){
 				entry.id = Date.now();
 				entry.recordType = this.state.page;
@@ -176,6 +191,19 @@ class App extends React.Component {
 				data[entry.id] = entry;
 			}
 			this.setState({data});
+		},
+
+		saveCustomer: (customer) => {
+			const data = {...this.state.data};
+			const subPage = this.state.subPage;
+			Object.keys(data).forEach(key => {
+				if(data[key].companyId === customer.companyId){
+					data[key].name = customer.name;
+					data[key].terms = customer.terms;
+				}
+			});
+			this.setState({data});
+			this.setState({subPage: ""})
 		},
 
 		displayConfirmationModal: () => {
@@ -189,12 +217,13 @@ class App extends React.Component {
 			this.entryMethods.deleteEntry(entry);
 			this.entryMethods.clearEntry();
 			this.changeSubPage("");
-			this.setState({confirmationModal: false})
+			this.clearDataView();
+			this.setState({confirmationModal: false});
 		},
 
 		deleteEntryNo: () => {
 			const confirmationModal = this.state.confirmationModal;
-			this.setState({confirmationModal: false})
+			this.setState({confirmationModal: false});
 		},
 
 		deleteEntry: (entry) => {
@@ -202,6 +231,18 @@ class App extends React.Component {
 			delete data[entry.id];
 			this.setState({data});
 		},
+
+		payInvoice: (entry, paymentAmount, paymentReference)=>{
+			const data = {...this.state.data};
+			const dataEntry = data[entry.id];
+			dataEntry.paymentReference = paymentReference;
+			let balance = parseFloat(dataEntry.balance);
+			dataEntry.balance = balance - paymentAmount;
+			if(dataEntry.balance === 0){
+				dataEntry.status = "paid";
+			};
+			this.setState({data});
+		}
 	}
 
 	render() {

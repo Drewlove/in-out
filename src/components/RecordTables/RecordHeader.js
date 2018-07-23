@@ -5,7 +5,7 @@ class RecordHeader extends React.Component{
 	render(){
 		return (
 			<thead>
-				<tr className="record-table-head-row">
+				<tr className="record-table-row">
 				{this.props.valuesArray.map(key =>
 					<RecordCell
 					value={`${key.charAt(0).toUpperCase()}${key.slice(1)}`}

@@ -4,7 +4,7 @@ import {formatPrice} from "../Helpers";
 
 class RecordRow extends React.Component {
 	handleClick = () => {
-		this.props.selectEntry(this.props.entry)
+		this.props.selectEntry(this.props.entry, this.props.subPage)
 	}
 
 	render(){

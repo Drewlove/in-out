@@ -1,23 +1,19 @@
-import React from 'react'; 
+import React from 'react';
 
 class Header extends React.Component{
 	handleClick = () => {
 		this.props.changePage("home");
-		this.props.changeSubPage(""); 
-		this.props.clearDataView(); 
+		this.props.changeSubPage("");
+		this.props.clearDataView();
 	}
 
 	render(){
 		return(
 			<div onClick={this.handleClick}>
-				<h1 className="header">
-				<span className="header-in">In</span> 
-				& 
-				<span className="header-out"span>Out</span>
-				</h1>
+				<h1 className="header">IN & OUT</h1>
 			</div>
 			)
 	}
 }
 
-export default Header; 
+export default Header;

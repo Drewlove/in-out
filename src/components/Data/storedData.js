@@ -5,9 +5,13 @@ const storedData = {
 		terms: 7,
 		dueDate: "2018-06-10",
 		amount: 100.00,
+		balance: 0,
 		id: 100,
+		companyId: 1,
 		recordType: "invoices",
-		status: "paid"
+		status: "paid",
+		paymentReference: "143",
+		notes: ""
 	},
 
 	101: {
@@ -16,9 +20,13 @@ const storedData = {
 		terms: 7,
 		dueDate: "2018-03-28",
 		amount: 50.75,
+		balance: 0,
 		id: 101,
+		companyId: 1,
 		recordType: "invoices",
-		status: "paid"
+		status: "paid",
+		paymentReference: "ETF",
+		notes: ""
 	},
 
 	102: {
@@ -27,9 +35,13 @@ const storedData = {
 		terms: 7,
 		dueDate: "2018-03-07",
 		amount: 253.00,
+		balance: 253.00,
 		id: 102,
+		companyId: 2,
 		recordType: "invoices",
-		status: "unpaid"
+		status: "unpaid",
+		paymentReference: "",
+		notes: ""
 	},
 
 	103: {
@@ -38,9 +50,13 @@ const storedData = {
 		terms: 7,
 		dueDate: "2018-05-11",
 		amount: 46.89,
+		balance: 46.89,
 		id: 103,
+		companyId: 2,
 		recordType: "invoices",
-		status: "unpaid"
+		status: "unpaid",
+		paymentReference: "",
+		notes: ""
 	},
 
 	104: {
@@ -49,9 +65,13 @@ const storedData = {
 		terms: 7,
 		dueDate: "2018-01-29",
 		amount: 799.00,
+		balance: 799.00,
 		id: 104,
+		companyId: 3,
 		recordType: "invoices",
-		status: "unpaid"
+		status: "unpaid",
+		paymentReference: "",
+		notes: ""
 	},
 
 	900: {
@@ -61,8 +81,11 @@ const storedData = {
 		dueDate: "2018-04-10",
 		amount: 100.00,
 		id: 900,
+		companyId: 4,
 		type: "Bills",
-		status: "paid"
+		status: "paid",
+		paymentReference: "",
+		notes: ""
 	},
 
 	901: {
@@ -72,8 +95,11 @@ const storedData = {
 		dueDate: "2018-03-10",
 		amount: 200.00,
 		id: 901,
+		companyId: 5,
 		type: "Bills",
-		status: "paid"
+		status: "paid",
+		paymentReference: "",
+		notes: ""
 	},
 
 	902: {
@@ -83,8 +109,11 @@ const storedData = {
 		dueDate: "2018-03-22",
 		amount: 300.00,
 		id: 902,
+		companyId: 6,
 		type: "Bills",
-		status: "unpaid"
+		status: "unpaid",
+		paymentReference: "",
+		notes: ""
 	},
 
 	903: {
@@ -94,8 +123,11 @@ const storedData = {
 		dueDate: "2018-03-29",
 		amount: 400.00,
 		id: 903,
+		companyId: 7,
 		type: "Bills",
-		status: "unpaid"
+		status: "unpaid",
+		paymentReference: "",
+		notes: ""
 	},
 
 	904: {
@@ -105,8 +137,11 @@ const storedData = {
 		dueDate: "2018-03-06",
 		amount: 500.00,
 		id: 904,
+		companyId: 8,
 		type: "Bills",
-		status: "unpaid"
+		status: "unpaid",
+		paymentReference: "",
+		notes: ""
 	}
 };
 

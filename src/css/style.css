@@ -1,5 +1,11 @@
 *{
-    font-family: helvetica; 
+    font-family: helvetica;
+}
+
+.edit-entry-name-amount>input{
+  font-size: 32px;
+  margin-bottom: 75px;
+  border: 2px solid #0000ff;
 }
 
 body{
@@ -10,7 +16,6 @@ body{
     position: fixed;
     width: 100%;
     text-align: center;
-    background-color: white;
     z-index: 1;
     top: 0;
     margin: 0;
@@ -19,13 +24,7 @@ body{
 
 .header:hover{
 	cursor:pointer;
-}
-
-.header-in{
-	color: #4fc15a;
-}
-.header-out{
-	color: red;
+  color: #0000ff;
 }
 
 .menu-item-container{
@@ -44,6 +43,7 @@ body{
     color: white;
     border-radius:15px;
     transition: transform 0.25s;
+    background-color: #0000ff;
 }
 
 .menu-item:hover{
@@ -51,41 +51,40 @@ body{
 	transform: scale(1.05);
 }
 
-.menu-item-in>div{
-	background-color: #4fc15a;
-}
-
-.menu-item-out>div{
-	background-color: red;
-}
-
-.menu-item-info>div{
-	background-color: black;
-}
-
 .record-table{
 	margin-top: 100px;
-    min-width: 500px;
 }
 
 .record-table>thead{
-    min-width: 500px;
     position: fixed;
-    background-color: yellow;
+    background-color: #0755ff;
     width: 100%;
     margin: 0px;
     top: 50px;
+    color: white;
 }
 
-.record-table-row:hover{
-    background-color: grey;
-    cursor: pointer;
+.record-table>thead:hover{
+  background-color: #0755ff
 }
 
-.record-table td{
-    font-size: 21px;
-    width: 125px;
-    padding: 10px;
+.record-table-row{
+  width:100%;
+}
+
+.record-table-row>td{
+  font-size: 18px;
+  min-width: 100px;
+  padding-bottom: 10px;
+  height: 35px;
+  line-height:35px;
+}
+
+tr:hover{
+  width: 100%;
+  background-color: #0755ff;
+  color: white;
+  cursor: pointer;
 }
 
 .entry{
@@ -106,4 +105,3 @@ body{
     margin-top: 50px;
     text-align: center;
 }
-
